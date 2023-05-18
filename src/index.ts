@@ -9,24 +9,26 @@ import { requestListener } from './lib/requestListener.js';
 import { httpsServerOptions } from './lib/httpsServerOptions.js';
 
 // instantiate http server
-// const httpServer = http.createServer(requestListener);
+const httpServer = http.createServer(requestListener);
 
-// //listen http server
-// httpServer.listen(config.httpPort, () => {
-// 	console.log(
-// 		`listening on port ${config.httpPort} (${config.name})`,
-// 	);
-// });
-
-// instantiate https server
-const httpsServer = https.createServer(
-	httpsServerOptions,
-	requestListener,
-);
-
-//listen https server
-httpsServer.listen(config.httpsPort, () => {
+//listen http server
+httpServer.listen(config.httpPort, () => {
 	console.log(
-		`listening on port ${config.httpsPort} (${config.name})`,
+		`listening on port ${config.httpPort} (${config.name})`,
 	);
 });
+
+
+
+// instantiate https server
+// const httpsServer = https.createServer(
+// 	httpsServerOptions,
+// 	requestListener,
+// );
+
+// //listen https server
+// httpsServer.listen(config.httpsPort, () => {
+// 	console.log(
+// 		`listening on port ${config.httpsPort} (${config.name})`,
+// 	);
+// });

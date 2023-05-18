@@ -1,6 +1,8 @@
 import http from 'http';
 import url from 'url';
 
+import { getHandlerAndParams } from './helpers.js';
+import { RequestMethodsEnum } from '../types.js';
 import { StringDecoder } from 'string_decoder';
 import { router } from '../router/index.js';
 
@@ -13,11 +15,13 @@ export const requestListener:
 	const parsedUrl = url.parse(req.url as string, true);
 
 	//trimmed path
-	const trimmedPath = parsedUrl.pathname?.replace(/^\/+|\/$/g, '');
+	const trimmedPath =
+		parsedUrl.pathname?.replace(/^\/+|\/$/g, '') || '';
 	console.log('trimmed path', trimmedPath);
 
 	// get method
-	const method = req.method?.toLowerCase();
+	const method = (req.method?.toLowerCase() ||
+		'get') as RequestMethodsEnum;
 
 	//query string as object
 	const queryObj = parsedUrl.query;
@@ -25,11 +29,9 @@ export const requestListener:
 
 	//headers as an object
 	const headers = req.headers;
-	// console.log('headers', headers);
 
-	//get payload if any
+	//get body if any
 	const stringDecoder = new StringDecoder('utf-8');
-
 	let buffer = '';
 
 	req.on('data', (data) => {
@@ -39,21 +41,25 @@ export const requestListener:
 	req.on('end', () => {
 		buffer += stringDecoder.end();
 
-		const handler = router[trimmedPath as string] || router.notFound;
+		const { handler, params } = getHandlerAndParams(
+			router,
+			trimmedPath,
+			method,
+		);
 
-		const data = {
+		const reqObject = {
 			path: trimmedPath,
 			query: queryObj,
 			headers,
-			payload: buffer,
+			body: buffer,
 			method,
+			params,
 		};
 
-		handler(data, (statusCode, payload) => {
+		handler(reqObject, (statusCode, payload) => {
 			const stringifiedResponse = JSON.stringify(payload || {});
 			res.setHeader('Content-Type', 'application/json');
 			res.writeHead(statusCode || 200);
-
 			res.end(stringifiedResponse);
 		});
 	});

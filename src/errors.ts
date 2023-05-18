@@ -5,4 +5,5 @@ export const errorMessages = {
 	invalidPayload: 'Invalid Payload',
 	invalidPassword: 'Invalid Password',
 	badRequest: 'Bad Request',
+	tokenExpired: 'Token Expired'
 };

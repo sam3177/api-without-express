@@ -1,23 +1,29 @@
-import { usersRouter } from './users.js';
-import { authRouter } from './auth.js';
-type CallbackType = (
-	statusCode: number,
-	payload?: { [key: string]: any },
-) => void;
-type HandlerType = (data: any, callback: CallbackType) => void;
+import { errorMessages } from '../errors.js';
+import { RouterInterface } from '../types.js';
 
-const router: {
-	[key: string]: HandlerType;
-} = {
-	users: usersRouter,
-	tokens: authRouter,
-	notFound: (_, callback) => {
-		callback(404, { data: 'not found' });
+import { registerUserRoutes } from './users.js';
+import { registerAuthRoutes } from './auth.js';
+
+const router: RouterInterface = {
+	routes: {
+		get: {},
+		post: {},
+		put: {},
+		delete: {},
+		notFound: (_, callback) => {
+			callback(404, { Error: errorMessages.notFound });
+		},
+		ping: (_, callback) => {
+			callback(200);
+		},
 	},
-	ping: (_, callback) => {
-		callback(200);
+
+	register: (method, path, handler) => {
+		router.routes[method][path] = handler;
 	},
 };
 
-export { router };
+registerUserRoutes();
+registerAuthRoutes();
 
+export { router };

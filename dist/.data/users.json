@@ -1,20 +1,13 @@
 {
   "users": [
     {
-      "firstName": "Sam",
+      "id": "f5936212-5e89-4175-b0cf-863c6f7647fd",
+      "firstName": "Samm",
       "lastName": "Jackson",
-      "password": "1c9511efa638ccc9805587326b54dd2e3cfd89438f7d0bf610085f1af8ce36be",
-      "email": "a@a.c",
-      "termsAgreed": true,
-      "id": "0766d5a7-ae3a-4284-a863-3103e6eed850"
-    },
-    {
-      "firstName": "Sam",
-      "lastName": "Jackson",
-      "password": "1c9511efa638ccc9805587326b54dd2e3cfd89438f7d0bf610085f1af8ce36be",
       "email": "a@a.a",
-      "termsAgreed": true,
-      "id": "f14c2550-a5a2-420a-91a7-4e4d28e562b1"
+      "password": {
+        "passwordHash": "4279dc07b9f81ca52a6e469fbf5838f7106318027cae92644fd977330ba07c26"
+      }
     }
   ]
 }

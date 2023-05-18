@@ -1,6 +1,38 @@
-export interface UserCreateInterface {
+export type RouteHandlerType = (
+	req: any,
+	res: (statusCode: number, payload?: any) => void,
+) => void;
+
+export enum RequestMethodsEnum {
+	GET = 'get',
+	POST = 'post',
+	PUT = 'put',
+	DELETE = 'delete',
+}
+
+export interface RouterInterface {
+	routes: {
+		[K in RequestMethodsEnum]: { [key: string]: RouteHandlerType };
+	} & {
+		notFound: RouteHandlerType;
+		ping: RouteHandlerType;
+	};
+	register: (
+		method: RequestMethodsEnum,
+		path: string,
+		handler: RouteHandlerType,
+	) => void;
+}
+
+export interface UserInterface {
+	id: string;
 	firstName: string;
 	lastName: string;
-	password: string;
-	termsAgreed: boolean;
+	email: string;
+	password: {
+		passwordHash: string;
+		authToken?: string;
+		resetPasswordToken?: string;
+		resetPasswordTokenExpires?: number;
+	};
 }
