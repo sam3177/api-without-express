@@ -8,6 +8,15 @@
       "password": {
         "passwordHash": "4279dc07b9f81ca52a6e469fbf5838f7106318027cae92644fd977330ba07c26"
       }
+    },
+    {
+      "id": "582c1a86-2292-4bc3-8c83-c27df774f077",
+      "firstName": "Samm",
+      "lastName": "Jackson",
+      "email": "a@a.as",
+      "password": {
+        "passwordHash": "b1d559b5aa8589d8f7c6c92fea90bda39e9430184bff0ad8294235a05f389a60"
+      }
     }
   ]
 }

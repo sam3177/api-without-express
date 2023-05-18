@@ -10,7 +10,7 @@ import { USERS_JSON } from '../lib/consts.js';
 import { router } from './index.js';
 
 export const registerUserRoutes = () => {
-	router.register(RequestMethodsEnum.GET, 'users', (req, res) => {
+	router.registerRoute(RequestMethodsEnum.GET, 'users', (req, res) => {
 		lib.read('/', USERS_JSON, (err, data) => {
 			if (err) throw new Error(err);
 			const users = parseJsonToObject(data).users || [];
@@ -21,7 +21,7 @@ export const registerUserRoutes = () => {
 		});
 	});
 
-	router.register(RequestMethodsEnum.GET, 'users/:id', (req, res) => {
+	router.registerRoute(RequestMethodsEnum.GET, 'users/:id', (req, res) => {
 		const { params } = req;
 
 		lib.read('/', USERS_JSON, (err, data) => {
@@ -43,7 +43,7 @@ export const registerUserRoutes = () => {
 		});
 	});
 
-	router.register(RequestMethodsEnum.PUT, 'users/:id', (req, res) => {
+	router.registerRoute(RequestMethodsEnum.PUT, 'users/:id', (req, res) => {
 		const { params, body } = req;
 
 		const requestBodyObject = parseJsonToObject(body);
@@ -86,7 +86,7 @@ export const registerUserRoutes = () => {
 		});
 	});
 
-	router.register(
+	router.registerRoute(
 		RequestMethodsEnum.DELETE,
 		'users/:id',
 		(req, res) => {

@@ -3,10 +3,6 @@ import { registerUserRoutes } from './users.js';
 import { registerAuthRoutes } from './auth.js';
 const router = {
     routes: {
-        get: {},
-        post: {},
-        put: {},
-        delete: {},
         notFound: (_, callback) => {
             callback(404, { Error: errorMessages.notFound });
         },
@@ -14,11 +10,14 @@ const router = {
             callback(200);
         },
     },
-    register: (method, path, handler) => {
+    registerRoute: (method, path, handler) => {
+        if (!router.routes[method]) {
+            router.routes[method] = {};
+        }
         router.routes[method][path] = handler;
     },
     getHandlerAndParams: (route, method) => {
-        const methodRoutes = router.routes[method];
+        const methodRoutes = router.routes[method] || {};
         if (methodRoutes[route])
             return { handler: methodRoutes[route] };
         const routeParts = route.split('/');

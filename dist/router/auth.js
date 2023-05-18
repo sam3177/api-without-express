@@ -5,7 +5,7 @@ import { RequestMethodsEnum } from '../types.js';
 import { errorMessages } from '../errors.js';
 import { router } from './index.js';
 export const registerAuthRoutes = () => {
-    router.register(RequestMethodsEnum.POST, 'login', (req, res) => {
+    router.registerRoute(RequestMethodsEnum.POST, 'login', (req, res) => {
         const requestBodyObject = parseJsonToObject(req.body);
         const { email, password } = requestBodyObject;
         if (!password || !email)
@@ -37,7 +37,7 @@ export const registerAuthRoutes = () => {
             });
         });
     });
-    router.register(RequestMethodsEnum.POST, 'signup', (req, res) => {
+    router.registerRoute(RequestMethodsEnum.POST, 'signup', (req, res) => {
         const requestBodyObject = parseJsonToObject(req.body);
         const { email, password, firstName, lastName } = requestBodyObject;
         if (!firstName || !lastName || !password || !email)
@@ -69,7 +69,7 @@ export const registerAuthRoutes = () => {
             });
         });
     });
-    router.register(RequestMethodsEnum.POST, 'forgot-password', (req, res) => {
+    router.registerRoute(RequestMethodsEnum.POST, 'forgot-password', (req, res) => {
         const requestBodyObject = parseJsonToObject(req.body);
         const { email } = requestBodyObject;
         if (!email)
@@ -100,7 +100,7 @@ export const registerAuthRoutes = () => {
             });
         });
     });
-    router.register(RequestMethodsEnum.POST, 'reset-password/:token', (req, res) => {
+    router.registerRoute(RequestMethodsEnum.POST, 'reset-password/:token', (req, res) => {
         const requestBodyObject = parseJsonToObject(req.body);
         const { password } = requestBodyObject;
         const { token } = req.params;

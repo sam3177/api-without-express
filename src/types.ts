@@ -8,16 +8,21 @@ export enum RequestMethodsEnum {
 	POST = 'post',
 	PUT = 'put',
 	DELETE = 'delete',
+	HEAD = 'head',
+	PATCH = 'patch',
+	OPTIONS = 'options',
+	CONNECT = 'connect',
+	TRACE = 'trace',
 }
 
 export interface RouterInterface {
 	routes: {
-		[K in RequestMethodsEnum]: { [key: string]: RouteHandlerType };
+		[K in RequestMethodsEnum]?: { [key: string]: RouteHandlerType };
 	} & {
 		notFound: RouteHandlerType;
 		ping: RouteHandlerType;
 	};
-	register: (
+	registerRoute: (
 		method: RequestMethodsEnum,
 		path: string,
 		handler: RouteHandlerType,
