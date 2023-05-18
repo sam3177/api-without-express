@@ -1,5 +1,4 @@
 import url from 'url';
-import { getHandlerAndParams } from './helpers.js';
 import { StringDecoder } from 'string_decoder';
 import { router } from '../router/index.js';
 export const requestListener = (req, res) => {
@@ -24,7 +23,7 @@ export const requestListener = (req, res) => {
     });
     req.on('end', () => {
         buffer += stringDecoder.end();
-        const { handler, params } = getHandlerAndParams(router, trimmedPath, method);
+        const { handler, params } = router.getHandlerAndParams(trimmedPath, method);
         const reqObject = {
             path: trimmedPath,
             query: queryObj,

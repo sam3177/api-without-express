@@ -1,7 +1,6 @@
 import http from 'http';
 import url from 'url';
 
-import { getHandlerAndParams } from './helpers.js';
 import { RequestMethodsEnum } from '../types.js';
 import { StringDecoder } from 'string_decoder';
 import { router } from '../router/index.js';
@@ -41,8 +40,7 @@ export const requestListener:
 	req.on('end', () => {
 		buffer += stringDecoder.end();
 
-		const { handler, params } = getHandlerAndParams(
-			router,
+		const { handler, params } = router.getHandlerAndParams(
 			trimmedPath,
 			method,
 		);

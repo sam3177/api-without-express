@@ -22,6 +22,13 @@ export interface RouterInterface {
 		path: string,
 		handler: RouteHandlerType,
 	) => void;
+	getHandlerAndParams: (
+		route: string,
+		method: RequestMethodsEnum,
+	) => {
+		handler: RouteHandlerType;
+		params?: { [key: string]: string };
+	};
 }
 
 export interface UserInterface {
