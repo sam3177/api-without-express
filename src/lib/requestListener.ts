@@ -16,7 +16,6 @@ export const requestListener:
 	//trimmed path
 	const trimmedPath =
 		parsedUrl.pathname?.replace(/^\/+|\/$/g, '') || '';
-	console.log('trimmed path', trimmedPath);
 
 	// get method
 	const method = (req.method?.toLowerCase() ||
@@ -24,7 +23,6 @@ export const requestListener:
 
 	//query string as object
 	const queryObj = parsedUrl.query;
-	// console.log('query obj', queryObj);
 
 	//headers as an object
 	const headers = req.headers;

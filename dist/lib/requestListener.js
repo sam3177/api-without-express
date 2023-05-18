@@ -6,13 +6,11 @@ export const requestListener = (req, res) => {
     const parsedUrl = url.parse(req.url, true);
     //trimmed path
     const trimmedPath = ((_a = parsedUrl.pathname) === null || _a === void 0 ? void 0 : _a.replace(/^\/+|\/$/g, '')) || '';
-    console.log('trimmed path', trimmedPath);
     // get method
     const method = (((_b = req.method) === null || _b === void 0 ? void 0 : _b.toLowerCase()) ||
         'get');
     //query string as object
     const queryObj = parsedUrl.query;
-    // console.log('query obj', queryObj);
     //headers as an object
     const headers = req.headers;
     //get body if any
